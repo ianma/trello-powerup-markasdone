@@ -45,8 +45,8 @@ var getCardLabelsWithIdFromBoard = function(card, boardLabels) {
 
 var addAndRemoveLabelIds = function(
   initialLabels,
-  removeWithNames,
   addWithNames,
+  removeWithNames,
   allLabels
 ) {
   var initialLabelIdsWithoutRemoved = initialLabels
@@ -69,7 +69,14 @@ var addAndRemoveLabelIds = function(
 };
 
 TrelloPowerUp.initialize({
-  "card-buttons": function(t, options) {
+  'show-settings': function(t, options){
+    return t.popup({
+      title: 'Mark As Done Settings',
+      url: './settings.html',
+      height: 184 // we can always resize later
+    });
+  },
+  'card-buttons': function(t, options) {
     // check that viewing member has write permissions on this board
     if (options.context.permissions.board !== "write") {
       return [];
@@ -102,16 +109,21 @@ TrelloPowerUp.initialize({
               ) {
                 return getCardLabelsWithIdFromBoard(card, boardLabels);
               });
+              
+              var pBoardConfiguration = t.get('board', 'shared');
 
               var pFinalCardLabelIds = Promise.join(
                 pCard,
                 pCardLabels,
                 pBoardLabels,
-                function(card, cardLabels, boardLabels) {
+                pBoardConfiguration,
+                function(card, cardLabels, boardLabels, boardConfiguration) {
+                  console.log("boardConfiguration", boardConfiguration);
+                  
                   var finalLabelIds = addAndRemoveLabelIds(
                     cardLabels,
-                    ["InProgress", "In Progress"],
-                    ["Merged", "Done"],
+                    boardConfiguration.addLabels || [],
+                    boardConfiguration.removeLabels || [],
                     boardLabels
                   );
                   return finalLabelIds;

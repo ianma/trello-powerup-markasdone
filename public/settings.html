@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://trello.com/power-ups/power-up.css">
+    <style>
+      select { height: 30px; }
+    </style>
+    <script src="https://trello.com/power-ups/power-up.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <form id="form">
+        <fieldset>
+          <label for="add-labels">Add Labels (one on each line)</label>
+          <textarea id="add-labels" type="text"></textarea>
+
+          <label for="remove-labels">Remove Labels (one on each line)</label>
+          <textarea id="remove-labels" type="text"></textarea>
+        </fieldset>
+        
+        <button type="submit" class="mod-primary">
+          Save  
+        </button>
+      </form>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://trello.com/1/client.js?key=ca2e03a8891562224e8597d913b19926"></script>
+    
+    <script>
+      var t = TrelloPowerUp.iframe();
+      
+      $("#form").submit(function( event ) {
+        var addLabels = $("#form #add-labels").val().split("\n");
+        var removeLabels = $("#form #remove-labels").val().split("\n");
+        
+        console.log("Add", addLabels, "Remove", removeLabels);
+        t.set('board', 'shared', {
+            addLabels: addLabels,
+            removeLabels: removeLabels
+          })
+         .then(function() {
+           t.closePopup(); 
+         });
+      });
+    </script>
+  </body>
+</html>
