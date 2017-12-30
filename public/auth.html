@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://trello.com/1/client.js?key=ca2e03a8891562224e8597d913b19926"></script>
+  </head>
+  <body>
+    <button id="auth-btn" type="submit" class="mod-primary">Authorize to Access Trello</button>
+    <script>
+      var t = TrelloPowerUp.iframe();
+      
+      $('#auth-btn').click(function() {  
+        window.Trello.authorize({
+          type: 'popup',
+          name: 'Mark As Done',
+          persist: 'true',
+          interactive: 'true',
+          scope: {
+            read: true,
+            write: true
+          },
+          expiration: '30days',
+          success: function() {
+            t.set('member', 'private', 'token', window.Trello.token())
+             .then(function() {
+               t.closePopup();
+             });
+          },
+          error: function(error) {
+            console.error("[MarkAsDone]", "[AuthBtn]", "[Error]", error);
+            t.closePopup();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "icma-done",
+  "version": "0.0.1",
+  "description": "Marks the card as done",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.15.2",
+    "express": "^4.15.2",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
+    "cors": "^2.8.3",
+    "moment": "^2.20.1"
+  },
+  "engines": {
+    "node": "6.10.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/clumsy-coffee"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}

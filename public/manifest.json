@@ -1,0 +1,19 @@
+{
+  "name": ".🏃🏽 Sprints 🏃.",
+  "details":"A Power-Up to demonstrate all of the things you can do with Power-Ups!",
+  "icon": {
+    "url": "https://cdn.glitch.com/a0166d9a-7b85-4089-b850-908b4169e3fd%2Fseal-of-approval.png?1514407977008"
+  },
+  "author": "Trello, Inc.",
+  "capabilities": [
+    "callback",
+    "card-buttons",
+    "card-detail-badges",
+    "show-settings"
+  ],
+  "connectors": {
+    "iframe": {
+      "url": "./index.html"
+    }
+  }
+}
